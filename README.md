@@ -49,7 +49,6 @@ MVP To Complete by end of week 13:
 
 [Website Link](https://unrivaled-wisp-07ed59.netlify.app/)
 
-[Link to Updated Github](https://github.com/andyhansana/final-project-proposal-gulag)
 
 ------------------------------
 (11/18/22) 
