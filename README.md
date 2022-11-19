@@ -59,7 +59,7 @@ MVP To Complete by end of week 13:
 Homework F.2: Final project GRADED deliverable 1 - deployed functional progress on final product
 
 -Include a description of what your app currently does
-	-Our application has a login with a github authenticator.
+	-Our application has a login with a github authenticator.<br /> 
 	-Once User is logged in, they are able to click the "Map" tab to bring themselves to the map.
 	-Map is fully functional via using a Google API key. 
 	-This map includes directions, calculating a route, and the distance/duration to get from point A to point B.
