@@ -72,9 +72,6 @@ function App() {
       <Routes>
         {/* Allow only authenticated user to proceed to RequestList, AddRequestForm, RequestChart else Navigate to landing component */}
         <Route path="/" element={<Landing />} />
-        <Route path="/list" element={<RequestList completeRequest={completeRequest} removeRequest={removeRequest} requests={requests} />} />
-        <Route path="/add" element={<AddRequestForm addRequest={addRequest} />} />
-        <Route path="/chart" element={<RequestChart requests={requests} />} />
         <Route path="/map" element={<Map  />} />
 
       </Routes>

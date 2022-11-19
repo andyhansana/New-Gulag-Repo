@@ -3,7 +3,7 @@ import React from 'react'
 function Landing() {
     return (
         <>
-            Welcome to our awesome 311 app.
+            Welcome to the car parking tracker application! 
         </>
     )
 }
