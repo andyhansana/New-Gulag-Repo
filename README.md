@@ -58,3 +58,24 @@ MVP To Complete by end of week 13:
 
 Homework F.2: Final project GRADED deliverable 1 - deployed functional progress on final product
 
+-Include a description of what your app currently does
+	-Our application has a login with a github authenticator.
+	-Once User is logged in, they are able to click the "Map" tab to bring themselves to the map.
+	-Map is fully functional via using a Google API key. 
+	-This map includes directions, calculating a route, and the distance/duration to get from point A to point B.
+	-Also includes icon to center map to original location.
+	- Implemented supabase database for backend that keeps track of users that are authenticated into the web application. 
+	
+-Include a link to the deployment of your app in README.md - this can be your main app URL, or a branch deploy.
+	- [Website Link](https://candid-sopapillas-7a08fe.netlify.app/)
+	-If needed to run on local machine, run NPM INSTALL to install all dependencies from the package.json. NPM RUN DEV will run the server locally with the web browser. 
+
+
+	
+	
+	
+	
+	
+	
+	
+	
