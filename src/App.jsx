@@ -5,6 +5,7 @@ import Landing from './components/Landing'
 import { AddRequestForm, RequestList } from './components/ServiceRequest'
 import RequestChart from "./components/Chart";
 
+
 import Map from "./components/Map";
 import {
   Routes,
@@ -73,7 +74,6 @@ function App() {
         {/* Allow only authenticated user to proceed to RequestList, AddRequestForm, RequestChart else Navigate to landing component */}
         <Route path="/" element={<Landing />} />
         <Route path="/map" element={<Map  />} />
-
       </Routes>
     </>
   );

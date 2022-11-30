@@ -19,9 +19,13 @@ import {
   DirectionsRenderer,
 } from '@react-google-maps/api'
 import { useRef, useState } from 'react'
+import GoogleMapComp from './GoogleMap'
 
 const center = { lat: 41.8781, lng: -87.6298 }
 function Map() {
+  const [oLat, setLat] = useState(center.lat);
+  const [oLng, setLng] = useState(center.lng);
+  const [MapRender, setMapRender] = useState(false);
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,
@@ -67,6 +71,15 @@ function Map() {
     destiantionRef.current.value = ''
   }
 
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log("Hello World: ", position)
+      setLat(position.coords.latitude)
+      setLng(position.coords.longitude)
+    })
+  }
+
+
   return (
     <Flex
       position='relative'
@@ -77,7 +90,7 @@ function Map() {
     >
       <Box position='relative' left={0} top={0} h='80%' w='50%'>
         {/* Google Map Box */}
-        <GoogleMap
+        {/* <GoogleMap
           center={center}
           zoom={15}
           mapContainerStyle={{ width: '100%', height: '100%' }}
@@ -89,11 +102,13 @@ function Map() {
           }}
           onLoad={map => setMap(map)}
         >
-          <Marker position={center} />
+          <Marker onLoad={() => {getLocation()}}  position={{lat:oLat, lng:oLng}}/>
+          <Marker position={{lat: 41.8781, lng: -87.6298 }}/>
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
-        </GoogleMap>
+        </GoogleMap> */}
+        <GoogleMapComp />
       </Box>
       <Box
         p={4}
@@ -144,6 +159,7 @@ function Map() {
             }}
           />
         </HStack>
+        <button onClick={() => {getLocation()}}>Find me!</button>
       </Box>
     </Flex>
   )
