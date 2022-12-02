@@ -39,7 +39,6 @@ const containerStyle = {
         if (latitude && longitude && !error) {
           // Fetch weather data here.
           setCurrentPosition({ lat: parseFloat(latitude), lng: parseFloat(longitude) });
-          
           console.log(currentPosition)
 
         }
@@ -49,7 +48,7 @@ const containerStyle = {
     return (
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={center}
+          center={currentPosition}
           zoom={11}
           
         >
