@@ -1,12 +1,10 @@
-
-import React, {useState, useEffect} from 'react'
-import { GoogleMap, MarkerF, LoadScript } from '@react-google-maps/api';
+import React, { useState, useEffect } from "react";
+import { GoogleMap, MarkerF, LoadScript } from "@react-google-maps/api";
 import { usePosition } from "use-position";
 
-
 const containerStyle = {
-    width: '500px',
-    height: '500px'
+    width: '800px',
+    height: '600px'
   };
   
   const center = {
@@ -18,44 +16,65 @@ const containerStyle = {
     const [oLng, setLng] = useState(center.lng);
     const [currentPosition, setCurrentPosition] = useState({ lat: 0, lng: 0 });
 
-    const { latitude, longitude, error } = usePosition();
+  const { latitude, longitude, error } = usePosition();
 
+  const findCurrentPosition = () => {
+    setCurrentPosition({
+      lat: parseFloat(latitude),
+      lng: parseFloat(longitude),
+    });
+    setShowMarker(true);
+    /* Save current position to database here */
+  };
 
-    const getLocation = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            console.log("Inside Get Location")
-          setLat(parseFloat(position.coords.latitude))
-          setLng(parseFloat(position.coords.longitude))
+  const removeSavedParkingLocation = () => {
+    setShowMarker(false);
+    /* Delete saved parking in database */
+  };
 
-        })
-      }
+  /* uncomment this later, but you want to fetch the position in the database here */
+  useEffect(() => {
+    // if(Databse has saved position) {
+    //   setCurrentPosition(whatever the db position is here)
+    // } else
+    if (latitude && longitude && !error) {
+      // Fetch weather data here.
+      setCurrentPosition({
+        lat: center.lat,
+        lng: center.lng,
 
-    // useEffect(() =>{
-    //     console.log("Inside Use Effect")
-    //     getLocation()
-    //   },[])
-    useEffect(() => {
-        console.log("use eff");
-        if (latitude && longitude && !error) {
-          // Fetch weather data here.
-          setCurrentPosition({ lat: parseFloat(latitude), lng: parseFloat(longitude) });
-          
-          console.log(currentPosition)
+      });
+      setShowMarker(false)
+    }
+  }, [latitude, longitude, error]);
 
-        }
-      }, [latitude, longitude, error]);
-
-
-    return (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={11}
-          
+  return (
+    <>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={currentPosition}
+        zoom={15}
+      >
+        {showMarker && <MarkerF position={currentPosition} />}
+      </GoogleMap>
+      <div style={{ display: "flex", flexDirection: "row", gap: 20 }}>
+        <button
+          onClick={() => {
+            findCurrentPosition();
+          }}
         >
-          <MarkerF position={currentPosition}/>
-        </GoogleMap>
-    )
-  }
-  
-  export default React.memo(GoogleMapComp)
+          I Just Parked!
+        </button>
+        <button
+          onClick={() => {
+            removeSavedParkingLocation();
+          }}
+        >
+          I'm No Longer Parked
+        </button>
+      </div>
+    </>
+  );
+}
+
+export default React.memo(GoogleMapComp);

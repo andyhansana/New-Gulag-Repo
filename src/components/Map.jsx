@@ -10,7 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { FaLocationArrow, FaTimes } from 'react-icons/fa'
-import "../App.css";
+
 import {
   useJsApiLoader,
   GoogleMap,
@@ -20,7 +20,6 @@ import {
 } from '@react-google-maps/api'
 import { useRef, useState } from 'react'
 import GoogleMapComp from './GoogleMap'
-import Remind from './Remind'
 
 const center = { lat: 41.8781, lng: -87.6298 }
 function Map() {
@@ -30,69 +29,66 @@ function Map() {
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY,
-    libraries: ['places'],
-  })
+    libraries: ["places"],
+  });
 
-  const [map, setMap] = useState(/** @type google.maps.Map */ (null))
-  const [directionsResponse, setDirectionsResponse] = useState(null)
-  const [distance, setDistance] = useState('')
-  const [duration, setDuration] = useState('')
+  const [map, setMap] = useState(/** @type google.maps.Map */ (null));
+  const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [distance, setDistance] = useState("");
+  const [duration, setDuration] = useState("");
 
   /** @type React.MutableRefObject<HTMLInputElement> */
-  const originRef = useRef()
+  const originRef = useRef();
   /** @type React.MutableRefObject<HTMLInputElement> */
-  const destiantionRef = useRef()
+  const destiantionRef = useRef();
 
   if (!isLoaded) {
-    return <></>
+    return <></>;
   }
 
   async function calculateRoute() {
-    if (originRef.current.value === '' || destiantionRef.current.value === '') {
-      return
+    if (originRef.current.value === "" || destiantionRef.current.value === "") {
+      return;
     }
     // eslint-disable-next-line no-undef
-    const directionsService = new google.maps.DirectionsService()
+    const directionsService = new google.maps.DirectionsService();
     const results = await directionsService.route({
       origin: originRef.current.value,
       destination: destiantionRef.current.value,
       // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
-    })
-    setDirectionsResponse(results)
-    setDistance(results.routes[0].legs[0].distance.text)
-    setDuration(results.routes[0].legs[0].duration.text)
+    });
+    setDirectionsResponse(results);
+    setDistance(results.routes[0].legs[0].distance.text);
+    setDuration(results.routes[0].legs[0].duration.text);
   }
 
   function clearRoute() {
-    setDirectionsResponse(null)
-    setDistance('')
-    setDuration('')
-    originRef.current.value = ''
-    destiantionRef.current.value = ''
+    setDirectionsResponse(null);
+    setDistance("");
+    setDuration("");
+    originRef.current.value = "";
+    destiantionRef.current.value = "";
   }
 
-  const getLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log("Hello World: ", position)
-      setLat(position.coords.latitude)
-      setLng(position.coords.longitude)
-    })
-  }
-
-  // -------------------------------- end of google map stuff ------------------------------------------------------------------------
 
   return (
-    <Flex
-      position='relative'
-      flexDirection='column'
-      alignItems='center'
-      h='100vh'
-      w='100vw'
+    // <Flex
+    //   position='relative'
+    //   flexDirection='column'
+    //   alignItems='center'
+    //   h='100vh'
+    //   w='100vw'
+    // >
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
     >
-
-    <div class="flex-parent-element" position="relative">
-      <Box class="flex-child-element magenta"  h='100%' w='90%'>
+      <Box position='relative' left={0} top={0} h='80%' w='50%'>
         {/* Google Map Box */}
         {/* <GoogleMap
           center={center}
@@ -114,13 +110,6 @@ function Map() {
         </GoogleMap> */}
         <GoogleMapComp />
       </Box>
-
-      <Box class="flex-child-element green" >
-        <Remind></Remind>
-      </Box>
-    </div>
-      
-
       <Box
         p={4}
         borderRadius='lg'
@@ -129,8 +118,8 @@ function Map() {
         shadow='base'
         minW='container.md'
         zIndex='1'
-      >
-        <HStack spacing={2} justifyContent='space-between'>
+      > */}
+      {/* <HStack spacing={2} justifyContent='space-between'>
           <Box flexGrow={1}>
             <Autocomplete>
               <Input type='text' placeholder='Origin' ref={originRef} />
@@ -170,10 +159,10 @@ function Map() {
             }}
           />
         </HStack>
-        <button onClick={() => {getLocation()}}>Find me!</button>
-      </Box>
-    </Flex>
-  )
+      </Box> */}
+      {/* </Flex> */}
+    </div>
+  );
 }
 
-export default Map
+export default Map;
