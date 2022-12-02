@@ -5,8 +5,8 @@ import { usePosition } from "use-position";
 
 
 const containerStyle = {
-    width: '600px',
-    height: '600px'
+    width: '500px',
+    height: '500px'
   };
   
   const center = {

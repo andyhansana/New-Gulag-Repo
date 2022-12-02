@@ -10,7 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { FaLocationArrow, FaTimes } from 'react-icons/fa'
-
+import "../App.css";
 import {
   useJsApiLoader,
   GoogleMap,
@@ -20,6 +20,7 @@ import {
 } from '@react-google-maps/api'
 import { useRef, useState } from 'react'
 import GoogleMapComp from './GoogleMap'
+import Remind from './Remind'
 
 const center = { lat: 41.8781, lng: -87.6298 }
 function Map() {
@@ -79,6 +80,7 @@ function Map() {
     })
   }
 
+  // -------------------------------- end of google map stuff ------------------------------------------------------------------------
 
   return (
     <Flex
@@ -88,7 +90,9 @@ function Map() {
       h='100vh'
       w='100vw'
     >
-      <Box position='relative' left={0} top={0} h='80%' w='50%'>
+
+    <div class="flex-parent-element" position="relative">
+      <Box class="flex-child-element magenta"  h='100%' w='90%'>
         {/* Google Map Box */}
         {/* <GoogleMap
           center={center}
@@ -110,6 +114,13 @@ function Map() {
         </GoogleMap> */}
         <GoogleMapComp />
       </Box>
+
+      <Box class="flex-child-element green" >
+        <Remind></Remind>
+      </Box>
+    </div>
+      
+
       <Box
         p={4}
         borderRadius='lg'

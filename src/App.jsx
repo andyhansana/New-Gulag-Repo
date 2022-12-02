@@ -4,8 +4,6 @@ import Nav from './components/Navbar'
 import Landing from './components/Landing'
 import { AddRequestForm, RequestList } from './components/ServiceRequest'
 import RequestChart from "./components/Chart";
-
-
 import Map from "./components/Map";
 import {
   Routes,
@@ -13,6 +11,15 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import Todos from "./components/Todos/Todos";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { withTheme } from "./components/Theme/Theme";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 
 function App() {
