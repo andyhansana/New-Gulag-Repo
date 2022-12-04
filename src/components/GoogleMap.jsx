@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, MarkerF, LoadScript } from "@react-google-maps/api";
 import { usePosition } from "use-position";
+import "../App.css";
 
 const containerStyle = {
-    width: '800px',
-    height: '600px'
-  };
-  
-  const center = {
-    lat: 41.8781, lng: -87.6298
-  };
-  
-  function GoogleMapComp() {
-    const [oLat, setLat] = useState(center.lat);
-    const [oLng, setLng] = useState(center.lng);
-    const [currentPosition, setCurrentPosition] = useState({ lat: 0, lng: 0 });
+  width: "800px",
+  height: "600px",
+};
+
+const center = {
+  lat: 41.8781,
+  lng: -87.6298,
+};
+
+function GoogleMapComp() {
+  const [currentPosition, setCurrentPosition] = useState(center);
+  const [showMarker, setShowMarker] = useState(true);
 
   const { latitude, longitude, error } = usePosition();
 
@@ -58,7 +59,9 @@ const containerStyle = {
         {showMarker && <MarkerF position={currentPosition} />}
       </GoogleMap>
       <div style={{ display: "flex", flexDirection: "row", gap: 20 }}>
+        <br></br>
         <button
+          class="parked"
           onClick={() => {
             findCurrentPosition();
           }}
@@ -66,6 +69,7 @@ const containerStyle = {
           I Just Parked!
         </button>
         <button
+          class="not-parked"
           onClick={() => {
             removeSavedParkingLocation();
           }}

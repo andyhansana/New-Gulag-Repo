@@ -29,6 +29,8 @@ const TodoList = () => {
           return (
             <ListItem key={todo.id}>
               <ListItemText primary={todo.text} />
+              <ListItemText primary={todo.date} />
+              <ListItemText primary={todo.time} />
               <ListItemSecondaryAction>
                 <Checkbox
                   checked={todo.completed}

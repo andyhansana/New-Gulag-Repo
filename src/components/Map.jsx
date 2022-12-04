@@ -1,27 +1,11 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Flex,
-  HStack,
-  IconButton,
-  Input,
-  SkeletonText,
-  Text,
-} from '@chakra-ui/react'
-import { FaLocationArrow, FaTimes } from 'react-icons/fa'
+import { useJsApiLoader } from "@react-google-maps/api";
+import { useRef, useState } from "react";
+import GoogleMapComp from "./GoogleMap";
+import "../App.css";
+import { createTheme } from '@material-ui/core/styles'
+import Remind from "./Remind";
 
-import {
-  useJsApiLoader,
-  GoogleMap,
-  Marker,
-  Autocomplete,
-  DirectionsRenderer,
-} from '@react-google-maps/api'
-import { useRef, useState } from 'react'
-import GoogleMapComp from './GoogleMap'
-
-const center = { lat: 41.8781, lng: -87.6298 }
+const center = { lat: 41.8781, lng: -87.6298 };
 function Map() {
   const [oLat, setLat] = useState(center.lat);
   const [oLng, setLng] = useState(center.lng);
@@ -71,7 +55,6 @@ function Map() {
     destiantionRef.current.value = "";
   }
 
-
   return (
     // <Flex
     //   position='relative'
@@ -88,9 +71,10 @@ function Map() {
         flexDirection: "column",
       }}
     >
-      <Box position='relative' left={0} top={0} h='80%' w='50%'>
-        {/* Google Map Box */}
-        {/* <GoogleMap
+    <div class="flex-parent-element">
+      {/* <Box class="flex-child-element magenta" position='relative' left={0} top={0} h='80%' w='50%'> */}
+      {/* Google Map Box */}
+      {/* <GoogleMap
           center={center}
           zoom={15}
           mapContainerStyle={{ width: '100%', height: '100%' }}
@@ -108,9 +92,13 @@ function Map() {
             <DirectionsRenderer directions={directionsResponse} />
           )}
         </GoogleMap> */}
-        <GoogleMapComp />
-      </Box>
-      <Box
+      <GoogleMapComp />
+      {/* </Box> */}
+      <Remind></Remind>
+      
+    </div>
+      
+      {/* <Box
         p={4}
         borderRadius='lg'
         m={4}

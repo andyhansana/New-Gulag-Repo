@@ -3,6 +3,8 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const Context = createContext({
   todos: [],
+  times: [],
+  dates: [],
 });
 
 const Provider = (props) => {
@@ -11,6 +13,8 @@ const Provider = (props) => {
     {
       id: 0,
       text: "Example Event",
+      date: "mm/dd/yyyy",
+      time: "00:00 AM",
       completed: false,
     },
     // {
@@ -24,12 +28,15 @@ const Provider = (props) => {
     //   completed: false,
     // },
   ]);
-  const addTodo = (text) => {
+
+  const addTodo = (text, date, time) => {
     const nextId =
       todos.length > 0 ? Math.max(...todos.map((t) => t.id)) + 1 : 0;
     const newTodo = {
       id: nextId,
       text,
+      date,
+      time,
       completed: false,
     };
     setTodos([...todos, newTodo]);

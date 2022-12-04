@@ -17,11 +17,17 @@ const useStyles = makeStyles((theme) => ({
 
 const TodoInput = (props) => {
   const { addTodo } = useTodos();
+
   const classes = useStyles();
   const [newTodo, setNewTodo] = useState("");
+  const [newTime, setNewTime] = useState("");
+  const [newDate, setNewDate] = useState("");
+
   const onClick = () => {
-    addTodo(newTodo);
+    addTodo(newTodo, newDate, newTime);
     setNewTodo("");
+    setNewDate("");
+    setNewTime("");
   };
   return (
     <>
@@ -29,11 +35,27 @@ const TodoInput = (props) => {
         <Grid item>
           <TextField
             className={classes.textField}
-            label="What do you want to do?"
+            label="Enter Task Name"
             variant="outlined"
             size="small"
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
+          />
+          <TextField
+            className={classes.textField}
+            type="date"
+            variant="outlined"
+            size="small"
+            value={newDate}
+            onChange={(e) => setNewDate(e.target.value)}
+          />
+          <TextField
+            className={classes.textField}
+            type="time"
+            variant="outlined"
+            size="small"
+            value={newTime}
+            onChange={(e) => setNewTime(e.target.value)}
           />
         </Grid>
         <Grid item>
@@ -44,7 +66,7 @@ const TodoInput = (props) => {
               color="primary"
               onClick={onClick}
             >
-              Add Todo
+              Add Reminder
             </Button>
           </Box>
         </Grid>
